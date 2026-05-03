@@ -216,6 +216,98 @@ When Christ shall come, with shout of acclamation,
 And take me home, what joy shall fill my heart.
 Then I shall bow, in humble adoration,
 And then proclaim: "My God, how great Thou art!"`
+            },
+            {
+                title: "Come Thou Fount",
+                lyrics: `1.
+Come, Thou Fount of ev'ry blessing;
+Tune my heart to sing Thy grace.
+Streams of mercy, never ceasing,
+Call for songs of loudest praise.
+Teach me some melodious sonnet,
+Sung by flaming tongues above.
+Praise the mount; I'm fixed upon it:
+Mount of Thy redeeming love.
+
+2.
+Here I raise my Ebenezer;
+Hither by Thy help I'm come.
+And I hope, by Thy good pleasure,
+Safely to arrive at home.
+Jesus sought me when a stranger,
+Wand'ring from the fold of God;
+He, to rescue me from danger,
+Interposed His precious blood.
+
+3.
+Oh, to grace how great a debtor
+Daily I'm constrained to be!
+Let Thy goodness, like a fetter,
+Bind my wand'ring heart to Thee.
+Prone to wander, Lord, I feel it,
+Prone to leave the God I love.
+Here's my heart, O take and seal it;`
+            },
+            {
+                title: "My Hope is Built on Nothing Less",
+                lyrics: `1.
+My hope is built on nothing less
+than Jesus' blood and righteousness;
+I dare not trust the sweetest frame,
+but wholly lean on Jesus' name.
+
+Refrain:
+On Christ, the solid Rock, I stand:
+all other ground is sinking sand;
+all other ground is sinking sand.
+
+2.
+When darkness veils his lovely face,
+I rest on his unchanging grace;
+in every high and stormy gale,
+my anchor holds within the veil.
+
+3.
+His oath, his covenant, his blood,
+support me in the whelming flood;
+when all around my soul gives way,
+he then is all my hope and stay.
+
+4.
+When he shall come with trumpet sound,
+O may I then in him be found:
+dressed in his righteousness alone,
+faultless to stand before the throne.`
+            },
+            {
+                title: "Eyes On the Clouds",
+                lyrics: `1.
+Waiting so impatiently living with the apathy
+Jesus said, we cannot know the time
+But still we dive into our books over and over again we look
+To make our guess at when He will arrive
+
+Bridge:
+And if it's hard to imagine that He's coming
+Just remember it's hard to believe He's been here before
+But if stride for stride He can keep up with my running
+Then I know any day soon He will come walking through my door
+
+Chorus:
+So I'll keep my eyes on the clouds
+Hoping to see my Jesus
+I'll keep my eyes on the clouds
+Hoping to see my Lord
+I'll keep my eyes on the clouds
+Knowing that He can free us
+Looking for a glimpse of the time
+My heart will soar
+
+2.
+He told me not to waste my days pushing to the limit my foolish ways
+He used to catch me passing out counterfeit smiles
+Though He never whispers in my ear His message is coming in loud and clear
+And I can feel His power building inside`
             }
         ];
     }
