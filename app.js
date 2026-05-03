@@ -441,7 +441,7 @@ And I can feel His power building inside`
                 continue;
             }
             
-            if (line.match(/^(Chorus|Refrain|Bridge):/i)) {
+            if (line.match(/^(Chorus|Refrain|Bridge):?$/i)) {
                 if (inVerse) formatted += '</div>';
                 formatted += `<div class="chorus"><div class="chorus-label">${this.escapeHtml(line)}</div>`;
                 inVerse = true;
