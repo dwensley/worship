@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Hymnal</title>
+    <style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif; line-height: 1.3; background-color: white; color: #333; }
+.view { display: none; max-width: 800px; margin: 0 auto; padding: 8px; }
+.view.active { display: block; }
+.header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; padding-bottom: 5px; border-bottom: 1px solid #8B4513; }
+.header h1 { color: #8B4513; font-size: 1.8em; font-weight: 600; }
+.add-btn, .back-btn, .edit-btn, .cancel-btn { background: none; color: #8B4513; border: none; text-decoration: none; cursor: pointer; padding: 2px 4px; font-size: 0.9em; }
+.add-btn:hover, .back-btn:hover, .edit-btn:hover, .cancel-btn:hover { color: #654321; }
+.song-list { display: grid; gap: 1px; }
+.song-item { background: none; padding: 2px; border: none; cursor: pointer; }
+.song-item:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+.song-item h3 { color: #8B4513; margin-bottom: 0; font-size: 0.9em; }
+.song-preview { color: #666; font-style: italic; }
+.song-content { background: none; padding: 8px; border: none; box-shadow: none; }
+.song-title { color: #8B4513; font-size: 1.6em; margin-bottom: 8px; text-align: center; cursor: pointer; border-bottom: 1px solid #8B4513; padding-bottom: 3px; }
+.song-author { color: #666; font-size: 0.8em; text-align: center; font-style: italic; margin-bottom: 8px; }
+.verse { margin-bottom: 6px; padding: 0; background: none; border: none; }
+.verse-number { font-weight: bold; color: #8B4513; margin-bottom: 2px; }
+.chorus { margin-bottom: 6px; padding: 0; background: none; border: none; }
+.chorus-label { font-weight: bold; color: #8B4513; margin-bottom: 2px; }
+.song-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+.form-view { background-color: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+.form-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+.form-group { margin-bottom: 20px; }
+.form-group label { display: block; margin-bottom: 5px; font-weight: 500; color: #333; }
+.form-group input, .form-group textarea { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-family: inherit; font-size: 14px; }
+.form-group input:focus, .form-group textarea:focus { outline: none; border-color: #8B4513; box-shadow: 0 0 0 2px rgba(139,69,19,0.1); }
+.form-actions { display: flex; gap: 10px; margin-top: 30px; }
+.form-actions button { padding: 12px 24px; border: none; border-radius: 4px; cursor: pointer; font-size: 14px; font-weight: 500; }
+.form-actions button[type="submit"] { background-color: #8B4513; color: white; }
+.form-actions button[type="submit"]:hover { background-color: #654321; }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div id="toc-view" class="view active">
+            <div class="header">
+                <h1>Hymnal</h1>
+                <div>
+                    <span id="add-song-btn" class="add-btn">Add Song</span>
+                </div>
+            </div>
+            <div id="song-list"></div>
+        </div>
+        
+        <div id="song-view" class="view">
+            <div class="song-header">
+                <button id="back-to-toc" class="back-btn">← Back to Songs</button>
+                <button id="edit-song-btn" class="edit-btn">Edit</button>
+            </div>
+            <div id="song-content"></div>
+        </div>
+        
+        <div id="form-view" class="view">
+            <div class="form-header">
+                <h2 id="form-title">Add New Song</h2>
+                <button id="cancel-form" class="cancel-btn">Cancel</button>
+            </div>
+            <form id="song-form">
+                <div class="form-group">
+                    <label for="song-title">Song Title:</label>
+                    <input type="text" id="song-title" required>
+                </div>
+                <div class="form-group">
+                    <label for="song-author">Author (optional):</label>
+                    <input type="text" id="song-author" placeholder="e.g., Charles Wesley">
+                </div>
+                <div class="form-group">
+                    <label for="song-lyrics">Lyrics:</label>
+                    <textarea id="song-lyrics" rows="15" placeholder="Enter lyrics here..." required></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" id="save-song">Save Song</button>
+                    <button type="button" id="delete-song" class="cancel-btn" style="color: #cc0000; display: none;">Delete Song</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="app-new.js"></script>
+</body>
+</html>
