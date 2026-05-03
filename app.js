@@ -239,21 +239,17 @@ And then proclaim: "My God, how great Thou art!"`
     }
     
     loadAllHymns() {
-        // Never remove existing songs - only add missing defaults
-        const defaultSongs = this.getDefaultSongs();
-        const existingTitles = this.songs.map(song => song.title.toLowerCase().trim());
+        console.log('Load All clicked - current songs:', this.songs.length);
         
-        defaultSongs.forEach(defaultSong => {
-            const defaultTitle = defaultSong.title.toLowerCase().trim();
-            if (!existingTitles.includes(defaultTitle)) {
-                console.log(`Adding missing hymn: ${defaultSong.title}`);
-                this.songs.push(defaultSong);
-            } else {
-                console.log(`Hymn already exists: ${defaultSong.title}`);
-            }
-        });
+        // Simple: if we have fewer than 6 songs, add all defaults
+        if (this.songs.length < 6) {
+            console.log('Adding all default songs');
+            const defaults = this.getDefaultSongs();
+            this.songs = [...defaults];
+        } else {
+            console.log('6+ songs exist, not adding defaults');
+        }
         
-        console.log(`Total songs after Load All: ${this.songs.length}`);
         this.saveSongs();
         this.showTocView();
     }
