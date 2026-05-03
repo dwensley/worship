@@ -239,8 +239,16 @@ And then proclaim: "My God, how great Thou art!"`
     }
     
     loadAllHymns() {
-        localStorage.removeItem('hymnal-songs');
-        this.songs = this.getDefaultSongs();
+        const defaultSongs = this.getDefaultSongs();
+        const existingTitles = this.songs.map(song => song.title.toLowerCase());
+        
+        // Only add default songs that don't already exist
+        defaultSongs.forEach(defaultSong => {
+            if (!existingTitles.includes(defaultSong.title.toLowerCase())) {
+                this.songs.push(defaultSong);
+            }
+        });
+        
         this.saveSongs();
         this.showTocView();
     }
@@ -294,10 +302,8 @@ And then proclaim: "My God, how great Thou art!"`
         }
 
         songList.innerHTML = this.songs.map((song, index) => {
-            const preview = song.lyrics.split('\n').slice(0, 2).join(' ').substring(0, 100) + '...';
             return `<div class="song-item" onclick="app.showSongView(${index})">
                         <h3>${index + 1}. ${this.escapeHtml(song.title)}</h3>
-                        <div class="song-preview">${this.escapeHtml(preview)}</div>
                     </div>`;
         }).join('');
     }
@@ -329,6 +335,13 @@ And then proclaim: "My God, how great Thou art!"`
             if (line.match(/^\d+\./)) {
                 if (inVerse) formatted += '</div>';
                 formatted += `<div class="verse"><div class="verse-number">${this.escapeHtml(line)}</div>`;
+                inVerse = true;
+                continue;
+            }
+            
+            if (line.match(/^(Chorus|Refrain):/i)) {
+                if (inVerse) formatted += '</div>';
+                formatted += `<div class="chorus"><div class="chorus-label">${this.escapeHtml(line)}</div>`;
                 inVerse = true;
                 continue;
             }
