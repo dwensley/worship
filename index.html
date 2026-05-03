@@ -4,33 +4,58 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Interactive Hymnal</title>
-    <link rel="stylesheet" href="style.css">
+    <style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif; line-height: 1.3; background-color: white; color: #333; }
+.view { display: none; max-width: 800px; margin: 0 auto; padding: 8px; }
+.view.active { display: block; }
+.header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; padding-bottom: 5px; border-bottom: 1px solid #8B4513; }
+.header h1 { color: #8B4513; font-size: 1.8em; font-weight: 600; }
+.add-btn, .back-btn, .edit-btn, .cancel-btn { background: none; color: #8B4513; border: none; padding: 0; font-size: 14px; cursor: pointer; text-decoration: underline; }
+.add-btn:hover, .back-btn:hover, .edit-btn:hover, .cancel-btn:hover { color: #654321; }
+.song-list { display: grid; gap: 15px; }
+.song-item { background: none; padding: 10px; border: none; cursor: pointer; }
+.song-item:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+.song-item h3 { color: #8B4513; margin-bottom: 10px; font-size: 1.4em; }
+.song-preview { color: #666; font-style: italic; }
+.song-content { background: none; padding: 8px; border: none; box-shadow: none; }
+.song-title { color: #8B4513; font-size: 1.6em; margin-bottom: 8px; text-align: center; cursor: pointer; border-bottom: 1px solid #8B4513; padding-bottom: 3px; }
+.verse { margin-bottom: 6px; padding: 0; background: none; border: none; }
+.verse-number { font-weight: bold; color: #8B4513; margin-bottom: 8px; }
+.chorus { margin-bottom: 6px; padding: 0; background: none; border: none; }
+.chorus-label { font-weight: bold; color: #8B4513; margin-bottom: 8px; }
+.form-view { background-color: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+.form-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+.form-group { margin-bottom: 20px; }
+.form-group label { display: block; margin-bottom: 8px; font-weight: bold; color: #8B4513; }
+.form-group input, .form-group textarea { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 5px; font-family: Georgia, serif; font-size: 16px; }
+.form-group textarea { resize: vertical; min-height: 200px; }
+.form-actions { text-align: center; }
+#save-song { background: none; color: #228B22; border: none; padding: 0; font-size: 14px; cursor: pointer; text-decoration: underline; }
+#save-song:hover { color: #1F7A1F; }
+.song-header { display: flex; justify-content: space-between; margin-bottom: 20px; }
+@media (max-width: 600px) { .header { flex-direction: column; gap: 15px; } .song-header { flex-direction: column; gap: 10px; } }
+    </style>
 </head>
 <body>
     <div id="app">
-        <!-- Table of Contents View -->
         <div id="toc-view" class="view active">
             <div class="header">
                 <h1>Hymnal</h1>
-                <button id="add-song-btn" class="add-btn">+ Add Song</button>
+                <div>
+                    <span id="add-song-btn" class="add-btn">Add Song</span> | 
+                    <span id="load-default-btn" class="add-btn">Load All</span>
+                </div>
             </div>
-            <div id="song-list" class="song-list">
-                <!-- Songs will be dynamically populated here -->
-            </div>
+            <div id="song-list" class="song-list"></div>
         </div>
-
-        <!-- Song View -->
         <div id="song-view" class="view">
             <div class="song-header">
                 <button id="back-to-toc" class="back-btn">← Back to Songs</button>
                 <button id="edit-song-btn" class="edit-btn">Edit</button>
             </div>
-            <div id="song-content">
-                <!-- Song content will be displayed here -->
-            </div>
+            <div id="song-content"></div>
         </div>
-
-        <!-- Add/Edit Song Form -->
         <div id="form-view" class="view">
             <div class="form-header">
                 <h2 id="form-title">Add New Song</h2>
@@ -43,15 +68,13 @@
                 </div>
                 <div class="form-group">
                     <label for="song-lyrics">Lyrics:</label>
-                    <textarea id="song-lyrics" rows="15" placeholder="Enter lyrics here...&#10;&#10;Use empty lines to separate verses.&#10;Start lines with 'Chorus:' for chorus sections." required></textarea>
+                    <textarea id="song-lyrics" rows="15" placeholder="Enter lyrics here..." required></textarea>
                 </div>
                 <div class="form-actions">
                     <button type="submit" id="save-song">Save Song</button>
                 </div>
             </form>
         </div>
-    </div>
-
-    <script src="app.js"></script>
+    </div>    <script src="hymnal-app-fixed.js?v=3"></script>
 </body>
 </html>
