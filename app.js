@@ -349,7 +349,7 @@ And then proclaim: "My God, how great Thou art!"`
                 continue;
             }
             
-            if (line.match(/^(Chorus|Refrain):/i)) {
+            if (line.match(/^(Chorus|Refrain|Bridge):/i)) {
                 if (inVerse) formatted += '</div>';
                 formatted += `<div class="chorus"><div class="chorus-label">${this.escapeHtml(line)}</div>`;
                 inVerse = true;
