@@ -239,16 +239,21 @@ And then proclaim: "My God, how great Thou art!"`
     }
     
     loadAllHymns() {
+        // Never remove existing songs - only add missing defaults
         const defaultSongs = this.getDefaultSongs();
-        const existingTitles = this.songs.map(song => song.title.toLowerCase());
+        const existingTitles = this.songs.map(song => song.title.toLowerCase().trim());
         
-        // Only add default songs that don't already exist
         defaultSongs.forEach(defaultSong => {
-            if (!existingTitles.includes(defaultSong.title.toLowerCase())) {
+            const defaultTitle = defaultSong.title.toLowerCase().trim();
+            if (!existingTitles.includes(defaultTitle)) {
+                console.log(`Adding missing hymn: ${defaultSong.title}`);
                 this.songs.push(defaultSong);
+            } else {
+                console.log(`Hymn already exists: ${defaultSong.title}`);
             }
         });
         
+        console.log(`Total songs after Load All: ${this.songs.length}`);
         this.saveSongs();
         this.showTocView();
     }
@@ -283,6 +288,7 @@ And then proclaim: "My God, how great Thou art!"`
         
         const song = this.songs[this.currentSong];
         document.getElementById('song-title').value = song.title;
+        document.getElementById('song-author').value = song.author || '';
         document.getElementById('song-lyrics').value = song.lyrics;
         this.editingIndex = this.currentSong;
     }
@@ -313,7 +319,8 @@ And then proclaim: "My God, how great Thou art!"`
         const formattedLyrics = this.formatLyrics(song.lyrics);
         
         const songNumber = this.currentSong + 1;
-        songContent.innerHTML = `<h1 class="song-title" onclick="app.showTocView()">${songNumber}. ${this.escapeHtml(song.title)}</h1>${formattedLyrics}`;
+        const authorLine = (song.author && song.author.trim()) ? `<div class="song-author">${this.escapeHtml(song.author)}</div>` : '';
+        songContent.innerHTML = `<h1 class="song-title" onclick="app.showTocView()">${songNumber}. ${this.escapeHtml(song.title)}</h1>${authorLine}${formattedLyrics}`;
     }
     
     formatLyrics(lyrics) {
@@ -362,6 +369,7 @@ And then proclaim: "My God, how great Thou art!"`
         e.preventDefault();
         
         const title = document.getElementById('song-title').value.trim();
+        const author = document.getElementById('song-author').value.trim();
         const lyrics = document.getElementById('song-lyrics').value.trim();
 
         if (!title || !lyrics) {
@@ -370,6 +378,9 @@ And then proclaim: "My God, how great Thou art!"`
         }
 
         const song = { title, lyrics };
+        if (author) {
+            song.author = author;
+        }
 
         if (this.editingIndex >= 0) {
             this.songs[this.editingIndex] = song;

@@ -20,6 +20,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial
 .song-preview { color: #666; font-style: italic; }
 .song-content { background: none; padding: 8px; border: none; box-shadow: none; }
 .song-title { color: #8B4513; font-size: 1.6em; margin-bottom: 8px; text-align: center; cursor: pointer; border-bottom: 1px solid #8B4513; padding-bottom: 3px; }
+.song-author { color: #666; font-size: 0.8em; text-align: center; font-style: italic; margin-bottom: 8px; }
 .verse { margin-bottom: 6px; padding: 0; background: none; border: none; }
 .verse-number { font-weight: bold; color: #8B4513; margin-bottom: 2px; }
 .chorus { margin-bottom: 6px; padding: 0; background: none; border: none; }
@@ -44,7 +45,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial
                 <h1>Hymnal</h1>
                 <div>
                     <span id="add-song-btn" class="add-btn">Add Song</span> | 
-                    <span id="load-default-btn" class="add-btn">Load All</span>
+                    <span id="load-default-btn" class="add-btn">Add Missing Hymns</span>
                 </div>
             </div>
             <div id="song-list" class="song-list"></div>
@@ -65,6 +66,10 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial
                 <div class="form-group">
                     <label for="song-title">Song Title:</label>
                     <input type="text" id="song-title" required>
+                </div>
+                <div class="form-group">
+                    <label for="song-author">Author (optional):</label>
+                    <input type="text" id="song-author" placeholder="e.g., Charles Wesley">
                 </div>
                 <div class="form-group">
                     <label for="song-lyrics">Lyrics:</label>
