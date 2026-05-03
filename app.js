@@ -296,7 +296,7 @@ And then proclaim: "My God, how great Thou art!"`
         songList.innerHTML = this.songs.map((song, index) => {
             const preview = song.lyrics.split('\n').slice(0, 2).join(' ').substring(0, 100) + '...';
             return `<div class="song-item" onclick="app.showSongView(${index})">
-                        <h3>${this.escapeHtml(song.title)}</h3>
+                        <h3>${index + 1}. ${this.escapeHtml(song.title)}</h3>
                         <div class="song-preview">${this.escapeHtml(preview)}</div>
                     </div>`;
         }).join('');
@@ -306,7 +306,8 @@ And then proclaim: "My God, how great Thou art!"`
         const songContent = document.getElementById('song-content');
         const formattedLyrics = this.formatLyrics(song.lyrics);
         
-        songContent.innerHTML = `<h1 class="song-title" onclick="app.showTocView()">${this.escapeHtml(song.title)}</h1>${formattedLyrics}`;
+        const songNumber = this.currentSong + 1;
+        songContent.innerHTML = `<h1 class="song-title" onclick="app.showTocView()">${songNumber}. ${this.escapeHtml(song.title)}</h1>${formattedLyrics}`;
     }
     
     formatLyrics(lyrics) {
