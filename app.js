@@ -323,19 +323,11 @@ And I can feel His power building inside`
     
     bindEvents() {
         document.getElementById('add-song-btn').addEventListener('click', () => this.showAddForm());
-        document.getElementById('load-default-btn').addEventListener('click', () => this.loadAllHymns());
-        document.getElementById('dump-songs-btn').addEventListener('click', () => this.dumpSongs());
         document.getElementById('back-to-toc').addEventListener('click', () => this.showTocView());
         document.getElementById('edit-song-btn').addEventListener('click', () => this.editCurrentSong());
         document.getElementById('cancel-form').addEventListener('click', () => this.showTocView());
         document.getElementById('delete-song').addEventListener('click', () => this.deleteSong());
         document.getElementById('song-form').addEventListener('submit', (e) => this.handleFormSubmit(e));
-    }
-    
-    dumpSongs() {
-        console.log('=== SONG BACKUP ===');
-        console.log(JSON.stringify(this.songs, null, 2));
-        alert(`You have ${this.songs.length} songs. Check console (F12) for full backup data.`);
     }
     
     deleteSong() {
@@ -347,22 +339,6 @@ And I can feel His power building inside`
             this.saveSongs();
             this.showTocView();
         }
-    }
-    
-    loadAllHymns() {
-        console.log('Load All clicked - current songs:', this.songs.length);
-        
-        // Simple: if we have fewer than 6 songs, add all defaults
-        if (this.songs.length < 6) {
-            console.log('Adding all default songs');
-            const defaults = this.getDefaultSongs();
-            this.songs = [...defaults];
-        } else {
-            console.log('6+ songs exist, not adding defaults');
-        }
-        
-        this.saveSongs();
-        this.showTocView();
     }
     
     showTocView() {
