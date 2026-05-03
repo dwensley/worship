@@ -328,6 +328,7 @@ And I can feel His power building inside`
         document.getElementById('back-to-toc').addEventListener('click', () => this.showTocView());
         document.getElementById('edit-song-btn').addEventListener('click', () => this.editCurrentSong());
         document.getElementById('cancel-form').addEventListener('click', () => this.showTocView());
+        document.getElementById('delete-song').addEventListener('click', () => this.deleteSong());
         document.getElementById('song-form').addEventListener('submit', (e) => this.handleFormSubmit(e));
     }
     
@@ -335,6 +336,17 @@ And I can feel His power building inside`
         console.log('=== SONG BACKUP ===');
         console.log(JSON.stringify(this.songs, null, 2));
         alert(`You have ${this.songs.length} songs. Check console (F12) for full backup data.`);
+    }
+    
+    deleteSong() {
+        if (this.editingIndex === -1) return;
+        
+        const song = this.songs[this.editingIndex];
+        if (confirm(`Are you sure you want to delete "${song.title}"? This cannot be undone.`)) {
+            this.songs.splice(this.editingIndex, 1);
+            this.saveSongs();
+            this.showTocView();
+        }
     }
     
     loadAllHymns() {
@@ -371,6 +383,7 @@ And I can feel His power building inside`
         document.getElementById('form-view').classList.add('active');
         document.getElementById('form-title').textContent = 'Add New Song';
         document.getElementById('song-form').reset();
+        document.getElementById('delete-song').style.display = 'none';
         this.editingIndex = -1;
     }
     
@@ -380,6 +393,7 @@ And I can feel His power building inside`
         this.hideAllViews();
         document.getElementById('form-view').classList.add('active');
         document.getElementById('form-title').textContent = 'Edit Song';
+        document.getElementById('delete-song').style.display = 'inline';
         
         const song = this.songs[this.currentSong];
         document.getElementById('song-title').value = song.title;
